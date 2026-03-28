@@ -222,7 +222,7 @@ Used **Google Apps Script Web App** + **Google Sheets**:
 - easy for teammates/prof to view logs
 - Google Sheet acts as the “dashboard” (filters/charts)
 
-### 6.3 Implemented Apps Script (Option B: standalone project)
+### 6.3 Implemented Apps Script
 Implemented:
 - `doPost(e)` reads JSON and appends a row into a fixed sheet by `SpreadsheetApp.openById(SHEET_ID)`
 - auto-creates `logs` tab if missing
