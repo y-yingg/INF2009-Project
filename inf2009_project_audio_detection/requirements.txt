@@ -1,0 +1,8 @@
+pyaudio
+sounddevice
+scipy
+matplotlib
+librosa
+SpeechRecognition
+swig
+pocketsphinx
