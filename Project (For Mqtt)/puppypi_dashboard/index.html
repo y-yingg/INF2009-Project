@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PuppyPi MQTT Dashboard</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 12px; }
+    .label { color: #666; font-size: 12px; }
+    .value { font-size: 18px; margin-top: 6px; word-break: break-word; }
+    .small { font-size: 12px; color: #888; margin-top: 6px; }
+    .sev-normal { background: #e9f7ef; }
+    .sev-warning { background: #fff8e1; }
+    .sev-urgent { background: #ffebee; }
+    input { padding: 6px; width: 220px; }
+    button { padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <h2>PuppyPi MQTT Dashboard</h2>
+
+  <div style="margin-bottom:12px;">
+    Broker WS URL:
+    <input id="wsUrl" value="ws://localhost:9001" />
+    <button id="btnConnect">Connect</button>
+    <span id="status" style="margin-left:10px;">Disconnected</span>
+  </div>
+
+  <div class="grid">
+    <div class="card" id="sevCard">
+      <div class="label">Severity</div>
+      <div class="value" id="severity">-</div>
+      <div class="small" id="severity_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">User ID</div>
+      <div class="value" id="user_id">-</div>
+      <div class="small" id="user_id_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Scene event</div>
+      <div class="value" id="scene_event">-</div>
+      <div class="small" id="scene_event_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Scene summary</div>
+      <div class="value" id="scene_summary">-</div>
+      <div class="small" id="scene_summary_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Voice intent</div>
+      <div class="value" id="voice_intent">-</div>
+      <div class="small" id="voice_intent_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Voice speaker ID</div>
+      <div class="value" id="voice_speaker_id">-</div>
+      <div class="small" id="voice_speaker_id_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Robot task</div>
+      <div class="value" id="robot_task">-</div>
+      <div class="small" id="robot_task_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Robot mode</div>
+      <div class="value" id="robot_mode">-</div>
+      <div class="small" id="robot_mode_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Nav status</div>
+      <div class="value" id="nav_status">-</div>
+      <div class="small" id="nav_status_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Task status</div>
+      <div class="value" id="task_status">-</div>
+      <div class="small" id="task_status_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Target locked</div>
+      <div class="value" id="target_locked">-</div>
+      <div class="small" id="target_locked_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Image ref</div>
+      <div class="value" id="image_ref">-</div>
+      <div class="small" id="image_ref_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Emergency refined summary</div>
+      <div class="value" id="em_refined">-</div>
+      <div class="small" id="em_refined_ts">Last update: -</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Emergency recommendation</div>
+      <div class="value" id="em_reco">-</div>
+      <div class="small" id="em_reco_ts">Last update: -</div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
