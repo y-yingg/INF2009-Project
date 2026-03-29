@@ -1,0 +1,8 @@
+torch
+torchvision
+transformers
+accelerate
+pillow
+sentencepiece
+safetensors
+huggingface_hub[cli]
