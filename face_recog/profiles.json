@@ -1,0 +1,22 @@
+{
+  "Taylor Swift": {
+    "risk": "High",
+    "style": "Gentle",
+    "robot_response": "Escalate quickly if distress"
+  },
+  "Michael Jordan": {
+    "risk": "Medium",
+    "style": "Normal",
+    "robot_response": "Ask what help is needed"
+  },
+  "Tom Cruise": {
+    "risk": "Low",
+    "style": "Playful",
+    "robot_response": "Observe first before escalating"
+  },
+  "Unknown": {
+    "risk": "Unknown",
+    "style": "Cautious",
+    "robot_response": "Do not personalise yet"
+  }
+}
