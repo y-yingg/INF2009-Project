@@ -18,20 +18,20 @@ PRESET_QUESTIONS = {
         ),
     },
     "2": {
-        "label": "check if using phone",
+        "label": "check if using phone/computer",
         "question": (
             "Look at the person in the image. "
-            "Are they using a phone? "
+            "Are they using a phone or computer? "
             "Answer in exactly this format:\n"
             "Answer: yes/no/unclear\n"
             "Reason: <short reason>"
         ),
     },
     "3": {
-        "label": "check if using computer",
+        "label": "check if in distress",
         "question": (
             "Look at the person in the image. "
-            "Are they using a computer or laptop? "
+            "Does the person appear to be in distress? "
             "Answer in exactly this format:\n"
             "Answer: yes/no/unclear\n"
             "Reason: <short reason>"
@@ -72,11 +72,11 @@ PRESET_QUESTIONS = {
 
 
     "7": {
-        "label": "rank likely activity",
+        "label": "rank most likely activity within the above 6 options",
         "question": (
             "Look at the main person in the image. "
             "Estimate how likely each of the following activities is: "
-            "falling, sleeping, studying/reading, using phone, using computer, eating, playing. "
+            "falling, sleeping, studying, reading, using phone, using computer, eating, playing, none of the above. "
             "Give a score from 0 to 100 for each activity. "
             "Then choose the single most likely activity. "
             "Answer in exactly this format:\n"
@@ -92,16 +92,7 @@ PRESET_QUESTIONS = {
         ),
     },
 
-    "8": {
-        "label": "check if distress",
-        "question": (
-            "Look at the person in the image. "
-            "Does the person appear to be in distress? "
-            "Answer in exactly this format:\n"
-            "Answer: yes/no/unclear\n"
-            "Reason: <short reason>"
-        ),
-    },
+
 
 }
 
