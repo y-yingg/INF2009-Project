@@ -3,6 +3,7 @@
 ## 1. Overview
 This project implements a **context-aware robotic system** that combines:
 - Face Recognition (identity)
+- Audio Detection (Commands)
 - Vision Language Model (scene understanding)
 - MQTT Backbone (communication)
 - Alerting + Cloud Logging
@@ -19,6 +20,7 @@ The system consists of 3 main subsystems:
 ### 2.1 Perception Layer
 - Face Recognition → identifies user
 - VLM → understands scene context
+- Audio Detection → captures voice commands
 
 ### 2.2 Communication Layer
 - MQTT backbone (publish / subscribe)
