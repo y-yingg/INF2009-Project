@@ -32,13 +32,12 @@ The system is modular, using MQTT for inter-process communication and logging, a
   - Emergency: Detects critical words like "help", "fire", "danger".
 - Output: Publishes intent and transcribed text to voice/intent.
 
-4. Communication (mqtt_subscriber.py & Modules)
-- Broker: Connects to a local MQTT broker (default configured to 192.168.137.44).
+**4. Communication `mqtt_subscriber.py` & Modules**
+- Broker: Connects to a local MQTT broker (default configured to `192.168.137.44`).
 - Topics:
-  - voice/distance: Distance telemetry.
-  - voice/speaker_id: Identification results.
-  - voice/intent: Command intents.
-  - voice/#: Wildcard subscription for debugging.
+  - `voice/distance`: Distance telemetry.
+  - `voice/speaker_id`: Identification results.
+  - `voice/intent`: Command intents.
 ---
 ## 3. Integration Status
 The system is designed to be orchestrated by a central `main.py`. The integration flow is as follows:
@@ -53,4 +52,36 @@ The system is designed to be orchestrated by a central `main.py`. The integratio
 ✅ Speaker ID: Implemented & Persistent Storage.
 ✅ Command Detection: Implemented (Vosk dependent).
 ✅ MQTT Logging: Implemented.
+---
+## 4. Setup Instructions
+**1. Install System Dependencies**
+```bash
+sudo apt-get update
+sudo apt-get install -y portaudio19-dev python3-pip python3-venv libatlas-base3
+```
+**2. Create Virtual Environment**
+```bash
+python3 -m venv audio_env
+source audio_env/bin/activate
+```
+**3. Install Python Packages**
+```bash
+pip install numpy sounddevice paho-mqtt
+pip install librosa  # Optional but recommended for Speaker ID
+pip install vosk     # Required for Command Detection
 
+OR
+
+pip install -r requirements.text
+```
+---
+## 5. Optimization and Edge Considerations
+**Optimization**
+- Feature Normalization: Speaker features are L2-normalized to ensure cosine similarity works effectively regardless of volume.
+- Buffering: Speaker ID buffers audio (~1.5s) before processing to ensure enough data for accurate identification.
+- Fallback Mechanisms: Speaker ID gracefully degrades to FFT features if `librosa` is not installed, ensuring compatibility on resource-constrained devices.
+**Edge Cases & Limitations**
+- Noise Sensitivity: Distance estimation relies on RMS. Background noise may falsely indicate a closer distance. Mitigation: Noise gating implemented in Speaker ID (volume > 0.02).
+- Wake Word False Positives: Simple string matching on transcribed text may trigger on similar-sounding words. Mitigation: Vosk confidence thresholds could be added.
+- Latency: Vosk processing is computationally heavy. On older Pi models, there may be a delay between speech and intent recognition.
+- Mic Selection: Code prioritizes USB mics. If using the Pi's GPIO header mic (I2S), the device selection logic in `distance.py` and `speaker_id.py` may need adjustment.
