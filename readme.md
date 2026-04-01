@@ -73,6 +73,7 @@ Face recognition provides:
 ---
 
 ## 5. Audio Detection Module
+(Refer to `inf2009_project_audio_detection/README.md` for full diary)
 
 ### Key Features
 - Wake-word detection by recognizing trigger phrases
