@@ -85,3 +85,24 @@ pip install -r requirements.text
 - Wake Word False Positives: Simple string matching on transcribed text may trigger on similar-sounding words. Mitigation: Vosk confidence thresholds could be added.
 - Latency: Vosk processing is computationally heavy. On older Pi models, there may be a delay between speech and intent recognition.
 - Mic Selection: Code prioritizes USB mics. If using the Pi's GPIO header mic (I2S), the device selection logic in `distance.py` and `speaker_id.py` may need adjustment.
+---
+## 6. Testing and Observations
+| Module     | Test Method                    | Observation                                                                 |
+|------------|--------------------------------|-----------------------------------------------------------------------------|
+| Distance   | Move mic away from sound source | RMS decreases linearly; distance estimate increases. Calibration is critical. |
+| Speaker ID | Speak vs. Silence              | Correctly ignores silence. Identifies registered users with ~85% accuracy in quiet rooms. |
+| Commands   | Say "Kitty fetch"              | Successfully triggers wake word and command intent.                        |
+| MQTT       | Run `mqtt_subscriber.py`       | All topics (`voice/#`) receive JSON payloads with timestamps.              |
+
+**Known issues:**
+- Vosk model path is hardcoded to `"model"`. Check if folder exists.
+---
+## 7. Future Improvements
+1. Voice Activity Detection (VAD): Implement a dedicated VAD (e.g., Silero) to reduce CPU usage compared to simple RMS thresholding.
+2. Deep Learning Speaker ID: Replace FFT/MFCC cosine similarity with a lightweight neural network (e.g., TensorFlow Lite) for better robustness against noise.
+3. Multi-Mic Array: Utilize the Puppypi's microphone array for Beamforming to improve distance estimation and noise cancellation.
+4. Dynamic Calibration: Add a routine to auto-recalibrate distance based on ambient noise floor.
+5. Configuration File: Move hardcoded values (MQTT IP, thresholds, wake words) to a `config.yaml` file.
+---
+## Summary
+This project provides a robust foundation for voice-interaction on the Hiwonder Puppypi. By combining distance awareness, user identification, and command recognition, the robot can interact more naturally with its environment. The modular MQTT architecture ensures that each component can be tested and improved independently while maintaining a cohesive system.
