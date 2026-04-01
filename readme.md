@@ -70,8 +70,28 @@ Face recognition provides:
 → **“who the user is”**, enabling personalised behaviour
 
 ---
+---
 
-## 5. VLM Module (Major Optimisation Highlight)
+## 5. Audio Detection Module
+
+### Key Features
+- Wake-word detection by recognizing trigger phrases
+- Command parsing through intent extraction
+- Speaker identification through voice analysis
+
+### Edge Optimisation
+- High latency using lightweight models without GPU acceleration
+- Audio privacy with no raw audio leaving device unless authorized
+- Resource constraints through resampled audio to 16kHz mono, processing in small buffers and releasing memory after inference
+- Background noise by implementing a simple Voice Activity Detection (VAD) to filter silence before feeding into the model
+
+### Key Insight
+- Moves interaction from button-based to natural voice
+- Processing on edge provides low latency and preserve user privacy
+
+---
+
+## 6. VLM Module (Major Optimisation Highlight)
 
 (Refer to `vlm/README.md` for full diary)
 
@@ -103,7 +123,7 @@ This represents:
 
 ---
 
-## 6. MQTT Backbone & System Integration
+## 7. MQTT Backbone & System Integration
 
 (Refer to Joanne’s diary for full details)
 
@@ -126,27 +146,27 @@ This represents:
 
 ---
 
-## 7. Optimisation & Edge Considerations
+## 8. Optimisation & Edge Considerations
 
-### 7.1 Computational Constraints
+### 8.1 Computational Constraints
 - Avoided heavy deep learning models where possible
 - Selected lightweight models (LBPH, small VLM)
 
-### 7.2 Latency Reduction
+### 8.2 Latency Reduction
 - Removed API calls (offline VLM)
 - Local inference for faster response
 
-### 7.3 Privacy
+### 8.3 Privacy
 - No external image transmission
 - All processing done locally
 
-### 7.4 Modular Design
+### 8.4 Modular Design
 - Each module developed independently
 - Allows flexible future integration
 
 ---
 
-## 8. Testing Summary
+## 9. Testing Summary
 
 ### Successful Outcomes
 - Face recognition works for trained users
@@ -161,7 +181,7 @@ This represents:
 
 ---
 
-## 9. Key Learnings
+## 10. Key Learnings
 
 Through this project, we learned:
 
@@ -172,7 +192,7 @@ Through this project, we learned:
 
 ---
 
-## 10. Future Improvements
+## 11. Future Improvements
 
 - Improve full system integration across modules
 - Optimise multi-module execution performance
@@ -181,7 +201,7 @@ Through this project, we learned:
 
 ---
 
-## 11. Conclusion
+## 12. Conclusion
 
 This project demonstrates the potential of a **context-aware edge AI system** that combines:
 - identity (face recognition)
@@ -194,7 +214,7 @@ Although the system is still a prototype, it successfully shows:
 
 ---
 
-## 12. Repository Structure
+## 13. Repository Structure
 
 ```
 face_recog/     → face recognition module
@@ -205,7 +225,7 @@ dashboard/      → web dashboard
 
 ---
 
-## 13. Setup Instructions
+## 14. Setup Instructions
 
 Run:
 ```bash
@@ -219,7 +239,7 @@ pip install -r requirements.txt
 
 ---
 
-## 14. Final Note
+## 15. Final Note
 
 This repository serves as a **development diary**, documenting:
 - what we built
