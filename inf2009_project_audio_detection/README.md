@@ -12,19 +12,19 @@ The system is modular, using MQTT for inter-process communication and logging, a
 
 ---
 ## 2. Implementation Details
-1. Distance Estimator (distance.py)
+**1. Distance Estimator `distance.py`**
 - Algorithm: Calculates Root Mean Square (RMS) energy of audio chunks.
 - Calibration: Uses a three-point calibration system (Close: 30cm, Medium: 1m, Far: 3m) to map RMS values to distance estimates.
 - Output: Publishes distance (cm) and RMS values to the MQTT topic voice/distance.
 - Hardware: Automatically selects USB audio input devices if available.
 
-2. Speaker Identification (speaker_id.py)
+**2. Speaker Identification `speaker_id.py`**
 - Feature Extraction: Uses MFCCs (via librosa) if available; falls back to FFT magnitude bins if librosa is missing.
 - Matching: Compares extracted features against stored profiles (speaker_profiles.pkl) using cosine similarity.
 - Registration: Includes a standalone script (register_speaker.py) to record and save user voice profiles.
 - Output: Publishes identified speaker name to voice/speaker_id.
 
-3. Command Detector (commands.py)
+**3. Command Detector `commands.py`**
 - Engine: Uses Vosk for offline speech-to-text.
 - Logic:
   - Wake Words: Listens for "kitty", "dog", "puppy", etc.
@@ -41,4 +41,16 @@ The system is modular, using MQTT for inter-process communication and logging, a
   - voice/#: Wildcard subscription for debugging.
 ---
 ## 3. Integration Status
+The system is designed to be orchestrated by a central `main.py`. The integration flow is as follows:
+1. Audio Stream: `sounddevice` captures audio at 16kHz.
+2. Chunk Processing: Each audio chunk is passed simultaneously to:
+  - `DistanceEstimator.process_next()`
+  - `SpeakerIdentifier.process_next()` (Buffers for utterance detection)
+  - `CommandDetector.process_next()` (Vosk stream)
+3. MQTT Loop: A background thread or non-blocking loop handles MQTT publishing/subscribing.
+4. Status:
+✅ Distance Estimation: Implemented & Calibratable.
+✅ Speaker ID: Implemented & Persistent Storage.
+✅ Command Detection: Implemented (Vosk dependent).
+✅ MQTT Logging: Implemented.
 
